@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8fc">
+  <title>SAIMED Analytics — Digital Link Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-mark"><span>S</span></span>
+        <span class="brand-copy"><strong>SAIMED</strong><small>ANALYTICS</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav">
+        <a class="nav-link active" href="#overview"><i class="bi bi-grid-1x2"></i><span>Overview</span></a>
+        <a class="nav-link" href="#traffic"><i class="bi bi-graph-up-arrow"></i><span>Traffic Analytics</span></a>
+        <a class="nav-link" href="#links"><i class="bi bi-link-45deg"></i><span>Link Performance</span></a>
+        <a class="nav-link" href="#audience"><i class="bi bi-people"></i><span>Audience</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon"><i class="bi bi-lightbulb"></i></div>
+          <strong>Insight untuk bisnis</strong>
+          <p>Pahami tautan yang paling menarik perhatian pengunjung.</p>
+          <a href="#guide">Cara kerja analytics <i class="bi bi-arrow-up-right"></i></a>
+        </div>
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div class="profile-text"><strong>SAIMED Admin</strong><small>Workspace owner</small></div>
+          <i class="bi bi-three-dots"></i>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn icon-btn d-lg-none" id="menuToggle" aria-label="Buka menu"><i class="bi bi-list"></i></button>
+          <div><div class="eyebrow">WORKSPACE / ANALYTICS</div><h1>Overview</h1></div>
+        </div>
+        <div class="top-actions">
+          <span class="live-indicator"><span></span> Live tracking</span>
+          <button class="btn btn-light icon-btn" id="refreshBtn" title="Refresh data"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-primary export-btn" id="exportBtn"><i class="bi bi-download me-2"></i>Export report</button>
+        </div>
+      </header>
+
+      <section class="welcome-row">
+        <div><h2>Selamat datang kembali 👋</h2><p>Pantau performa SAIMED Digital Link Hub dalam satu tampilan.</p></div>
+        <div class="filter-wrap">
+          <i class="bi bi-calendar3"></i>
+          <select class="form-select form-select-sm" id="dateFilter" aria-label="Periode analytics">
+            <option value="7">7 hari terakhir</option><option value="30" selected>30 hari terakhir</option><option value="90">90 hari terakhir</option><option value="all">Semua waktu</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Ringkasan performa">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total kunjungan</span><span class="stat-icon blue"><i class="bi bi-eye"></i></span></div>
+          <div class="stat-value" id="totalViews">—</div><div class="stat-foot"><span class="trend positive" id="viewsTrend"><i class="bi bi-arrow-up-right"></i> —</span><span>vs periode sebelumnya</span></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Total klik tautan</span><span class="stat-icon mint"><i class="bi bi-cursor"></i></span></div>
+          <div class="stat-value" id="totalClicks">—</div><div class="stat-foot"><span class="trend positive" id="clicksTrend"><i class="bi bi-arrow-up-right"></i> —</span><span>vs periode sebelumnya</span></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Click-through rate</span><span class="stat-icon violet"><i class="bi bi-bullseye"></i></span></div>
+          <div class="stat-value" id="ctr">—</div><div class="stat-foot"><span class="trend neutral"><i class="bi bi-info-circle"></i> Interaksi / kunjungan</span></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Link terpopuler</span><span class="stat-icon amber"><i class="bi bi-trophy"></i></span></div>
+          <div class="stat-value stat-popular" id="topLink">—</div><div class="stat-foot"><span id="topLinkClicks">Belum ada klik</span><span>paling banyak dipilih</span></div>
+        </article>
+      </section>
+
+      <section class="content-grid" id="traffic">
+        <article class="panel traffic-panel">
+          <div class="panel-heading"><div><h3>Traffic overview</h3><p>Aktivitas kunjungan dan klik tautan</p></div><div class="legend"><span><i class="legend-dot views-dot"></i>Kunjungan</span><span><i class="legend-dot clicks-dot"></i>Klik</span></div></div>
+          <div class="chart-wrap"><canvas id="trafficChart" aria-label="Grafik kunjungan dan klik"></canvas></div>
+        </article>
+        <article class="panel source-panel" id="audience">
+          <div class="panel-heading"><div><h3>Perangkat pengunjung</h3><p>Distribusi berdasarkan perangkat</p></div><button class="subtle-icon" title="Informasi"><i class="bi bi-info-circle"></i></button></div>
+          <div class="device-chart-wrap"><canvas id="deviceChart" aria-label="Grafik perangkat"></canvas><div class="donut-center"><strong id="deviceTotal">0</strong><span>Pengunjung</span></div></div>
+          <div class="device-legend" id="deviceLegend"></div>
+        </article>
+      </section>
+
+      <section class="panel links-panel" id="links">
+        <div class="panel-heading links-heading"><div><h3>Performa tautan</h3><p>Tautan yang tersedia pada halaman SAIMED Digital Link Hub</p></div><a class="view-all" href="#links">Lihat laporan <i class="bi bi-arrow-right"></i></a></div>
+        <div class="table-responsive">
+          <table class="table align-middle performance-table">
+            <thead><tr><th>TAUTAN</th><th>TOTAL KLIK</th><th>KONTRIBUSI</th><th>PERFORMA</th></tr></thead>
+            <tbody id="linksTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel activity-panel">
+          <div class="panel-heading"><div><h3>Aktivitas terbaru</h3><p>Interaksi terakhir yang tercatat</p></div><span class="soft-pill">Terbaru</span></div>
+          <div class="activity-list" id="activityList"></div>
+        </article>
+        <article class="panel insight-panel" id="guide">
+          <div class="insight-symbol"><i class="bi bi-stars"></i></div><div><span class="insight-kicker">QUICK INSIGHT</span><h3 id="insightTitle">Kenali minat pengunjung</h3><p id="insightText">Data klik membantu Anda mengetahui kanal mana yang paling sering dipilih calon pelanggan.</p></div>
+        </article>
+      </section>
+
+      <footer class="footer"><span>© SAIMED <span id="year"></span> · Digital Link Hub Analytics</span><span><i class="bi bi-shield-check me-1"></i>Data tersimpan pada browser ini</span></footer>
+    </main>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="appToast" class="toast" role="status"><div class="toast-body"><i class="bi bi-check-circle-fill text-success me-2"></i><span id="toastMessage">Berhasil.</span></div></div></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
